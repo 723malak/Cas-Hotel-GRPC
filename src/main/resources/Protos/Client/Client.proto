@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package ma.emsi.grpchotels.grpc;
+
+option java_package = "ma.emsi.grpchotels.stub.client";
+
+
+
+service ClientService {
+  rpc FindById(FindByIdRequest) returns ( clientResponse);
+  rpc Create( clientRequest) returns ( clientResponse);
+  rpc Update( clientRequestUpd) returns ( clientResponse);
+  rpc Delete(FindByIdRequest) returns ( clientResponse);
+  rpc FindByemail(FindByRequestbyemailornom) returns (FindAllResponse);
+  rpc FindAll(FindByRequest) returns (FindAllResponse);
+}
+message FindByRequest{
+}
+message FindByRequestbyemailornom{
+  string data =1;
+}
+message  clientRequest {
+  string nom = 1;
+  string email = 2;
+  string tel = 3;
+
+
+}
+message  clientRequestUpd {
+  int64 id =1;
+  clientRequest client=2;
+}
+
+message  clientResponse {
+  int64 id = 1;
+  string nom = 2;
+  string email = 3;
+  string tel = 4;
+}
+
+message FindByIdRequest {
+  int64 id = 1;
+}
+
+message FindAllResponse {
+  repeated  clientResponse  clients = 1;
+}

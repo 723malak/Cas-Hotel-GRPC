@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package ma.emsi.grpchotels.grpc;
+
+option java_package = "ma.emsi.grpchotels.stub.reservation";
+
+
+
+service ReservationService {
+  rpc FindById(FindByIdRequest) returns (  reservationResponse);
+  rpc Create(  reservationRequest) returns (  reservationResponse);
+  rpc Update(  reservationRequestUpd) returns (  reservationResponse);
+  rpc Delete(FindByIdRequest) returns (  reservationResponse);
+  rpc FindAll(FindByRequest) returns (FindAllResponse);
+}
+message FindByRequest{
+}
+
+message   reservationRequest {
+  int64 clientId = 1;
+  int64 chambreId = 2;
+  string dateDebut = 3;
+  string dateFin = 4;
+  string preferences = 35;
+
+
+}
+message   reservationRequestUpd {
+  int64 id =1;
+   reservationRequest  reservation=2;
+}
+
+message   reservationResponse {
+  int64 id = 1;
+  int64 clientId = 2;
+  int64 chambreId = 3;
+  string dateDebut = 4;
+  string dateFin = 5;
+  string preferences = 6;
+}
+
+message FindByIdRequest {
+  int64 id = 1;
+}
+
+message FindAllResponse {
+  repeated   reservationResponse   reservations = 1;
+}

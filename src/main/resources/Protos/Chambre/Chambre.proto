@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package ma.emsi.grpchotels.grpc;
+
+option java_package = "ma.emsi.grpchotels.stub.chambre";
+
+
+
+service ChambreService {
+  rpc FindById(FindByIdRequest) returns (ChambreResponse);
+  rpc Create(ChambreRequest) returns (ChambreResponse);
+  rpc Update(ChambreRequest) returns (ChambreResponse);
+  rpc Delete(FindByIdRequest) returns (ChambreResponse);
+  rpc FindByDisponibilite(FindByRequestbyDisponibilite) returns (FindAllResponse);
+  rpc FindAll(FindByRequest) returns (FindAllResponse);
+
+}
+message FindByRequest{
+}
+message FindByRequestbyDisponibilite{
+  bool disponible =1;
+}
+message ChambreRequest {
+  int64 id = 1;
+  string type = 2;
+  double prix = 3;
+  bool disponible = 4;
+}
+
+message ChambreResponse {
+  int64 id = 1;
+  string type = 2;
+  double prix = 3;
+  bool disponible = 4;
+}
+
+message FindByIdRequest {
+  int64 id = 1;
+}
+
+message FindAllResponse {
+  repeated ChambreResponse chambres = 1;
+}
